@@ -4,16 +4,16 @@
 <head>
 	<title>Hello App</title>
 
-	<!-- <script type="text/javascript" src="/scripts/jquery-1.9.1.min.js" /> -->
+	<script type="text/javascript" src="/scripts/jquery-1.9.1.min.js" />
 
 	<script type="text/javascript">
 		function log (txt) {
 			alert (txt);
-		//	$ ('log').append ('<li>').text (txt);
+			$ ('log').append ('<li>').text (txt);
 		};
 
 		function gotoUrlClick () {
-			var url = 'http://www.google.com/';
+			var url = 'http://login.salesforce.com/';
 			log ('goto ' + url);
 			var ref = window.open (url);
 			ref.addEventListener ('loadstart', function (e) { log (JSON.stringify (e)); });
@@ -29,7 +29,7 @@
 	<h1>Hello VF!</h1>
 
 	<button type="button" onclick="gotoUrlClick()">
-		go to Google ...
+		go to ...
 	</button>
 
 	<ul id="log"></ul>
