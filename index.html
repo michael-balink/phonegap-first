@@ -21,6 +21,8 @@
 			ref.addEventListener ('loaderror', function (e) { log (JSON.stringify (e)); });
 			ref.addEventListener ('exit', function (e) { log (JSON.stringify (e)); });
 		};
+
+		document.addEventListener("deviceready", function (e) { log (JSON.stringify (e)); }, false);
 	</script>
 </head>
 <body>
