@@ -3,12 +3,33 @@
 <html>
 <head>
 	<title>Hello App</title>
+
+	<script type="text/javascript" src="/scripts/jquery-1.9.1.min.js" />
+
+	<script type="text/javascript">
+		function log (txt) {
+			alert (txt);
+			$ ('log').append ('<li>').text (txt);
+		};
+
+		function gotoUrlClick () {
+			var url = 'www.google.com';
+			log ('goto ' + url);
+			var ref = window.open (url, '_self');
+			ref.addEventListener ('loadstart', function (e) { log (JSON.stringify (e)); });
+			ref.addEventListener ('loadstop', function (e) { log (JSON.stringify (e)); });
+			ref.addEventListener ('loaderror', function (e) { log (JSON.stringify (e)); });
+			ref.addEventListener ('exit', function (e) { log (JSON.stringify (e)); });
+		};
+	</script>
 </head>
 <body>
 	<h1>Hello VF!</h1>
 
-	<button type="button" onclick="window.open ('www.google.com', '_self', 'locationbar=false');">
+	<button type="button" onclick="gotoUrlClick">
 		go to Google ...
 	</button>
+
+	<ul id="log"></ul>
 </body>
 </html>
