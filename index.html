@@ -13,9 +13,9 @@
 		};
 
 		function gotoUrlClick () {
-			var url = 'www.google.com';
+			var url = 'http://www.google.com/';
 			log ('goto ' + url);
-			var ref = window.open (url, '_self');
+			var ref = window.open (url);
 			ref.addEventListener ('loadstart', function (e) { log (JSON.stringify (e)); });
 			ref.addEventListener ('loadstop', function (e) { log (JSON.stringify (e)); });
 			ref.addEventListener ('loaderror', function (e) { log (JSON.stringify (e)); });
@@ -28,7 +28,7 @@
 <body>
 	<h1>Hello VF!</h1>
 
-	<button type="button" onclick="gotoUrlClick">
+	<button type="button" onclick="gotoUrlClick()">
 		go to Google ...
 	</button>
 
