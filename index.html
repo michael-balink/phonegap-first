@@ -97,7 +97,8 @@
 		};
 
 		function onLoad () {
-			document.addEventListener ("deviceready", function (e) { deviceReady (); alert (JSON.stringify (e)); }, false);
+			log ('onLoad');
+			document.addEventListener ("deviceready", function (e) { deviceReady (); log (JSON.stringify (e)); }, false);
 		}
 	</script>
 </head>
