@@ -42,17 +42,18 @@
 			    + '&redirect_uri=' + escape(redirectUri);
 			};
 
-            var cb = ChildBrowser.install();
+        //    var cb = ChildBrowser.install();
 
             $('#login').click(function(e) {
                 e.preventDefault();
-                cb.onLocationChange = function(loc){   
+        //        cb.onLocationChange = function(loc){   
                     if (loc.startsWith(redirectUri)) {
-                        cb.close();
+        //                cb.close();
                         sessionCallback(unescape(loc));
                     }
                 };
-                cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
+        //        cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
+        		window.open (getAuthorizeUrl(loginUrl, clientId, redirectUri));
             });
 
 	        function sessionCallback(loc) {
