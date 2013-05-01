@@ -4,9 +4,9 @@
 <head>
 	<title>Hello App</title>
 
-	<script type="text/javascript" src="/scripts/jquery-1.9.1.min.js" />
+	<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
 
-	<script type="text/javascript" src="/scripts/forcetk.js" />
+	<script type="text/javascript" src="scripts/forcetk.js"></script>
 
 	<script type="text/javascript">
 		$ (function () {
@@ -44,7 +44,7 @@
 			};
 
             var cb = ChildBrowser.install();
-            
+
             $('#login').click(function(e) {
                 e.preventDefault();
                 cb.onLocationChange = function(loc){   
