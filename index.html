@@ -12,14 +12,14 @@
 	<script type="text/javascript" src="scripts/forcetk.js"></script>
 
 	<script type="text/javascript">
+		function log (txt) {
+			alert (txt);
+			$ ('#log').append ($ ('<li>').append ('<pre>').html (txt));
+		}
+
+		String.prototype.startsWith = function (str) { return (this.substr(0, str.length) === str); }
+
 		function deviceReady () {
-			function log (txt) {
-				alert (txt);
-				$ ('#log').append ($ ('<li>').append ('<pre>').html (txt));
-			};
-
-			String.prototype.startsWith = function (str) { return (this.substr(0, str.length) === str); }
-
 			// OAuth Configuration
 			var loginUrl = 'https://login.salesforce.com/';
 			var clientId = '3MVG99qusVZJwhslGI._DuPtlMPe9V0ymb6n.SANvHchAqg0mhEPhPz6lDQ71b5RS8bMeYeCSLIlfsJBWwNx7';
@@ -94,11 +94,10 @@
 	                );
 	            }
 	        }
-		};
+		}
 
 		function onLoad () {
-			log ('onLoad');
-			document.addEventListener ("deviceready", function () { deviceReady (); }, false);
+			document.addEventListener ("deviceready", deviceReady, false);
 		}
 	</script>
 </head>
