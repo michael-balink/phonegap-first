@@ -31,7 +31,7 @@
 
 			// OAuth Configuration
 			var loginUrl = 'https://login.salesforce.com/';
-			var clientId = '3MVG9Km_cBLhsuPzTtcGHsZpj9HSp.uUwbHupEXhWi6k3JJphEv8swpsUYIFCZSLp8pi7YYMbRjeQUxptYdIt';
+			var clientId = '3MVG99qusVZJwhslGI._DuPtlMPe9V0ymb6n.SANvHchAqg0mhEPhPz6lDQ71b5RS8bMeYeCSLIlfsJBWwNx7';
 			var redirectUri = 'https://login.salesforce.com/services/oauth2/success';
 
 			var client = new forcetk.Client(clientId, loginUrl);
@@ -42,20 +42,20 @@
 			    + '&redirect_uri=' + escape(redirectUri);
 			};
 
-        //    var cb = ChildBrowser.install();
+            var cb = ChildBrowser.install();
 
             $('#login').click(function(e) {
                 e.preventDefault();
-            /*
+            
                 cb.onLocationChange = function(loc){   
                     if (loc.startsWith(redirectUri)) {
                         cb.close();
                         sessionCallback(unescape(loc));
                     }
                 };
-            */
-        //        cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
-        		window.open (getAuthorizeUrl(loginUrl, clientId, redirectUri));
+            
+                cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
+        //		window.open (getAuthorizeUrl(loginUrl, clientId, redirectUri));
             });
 
 	        function sessionCallback(loc) {
