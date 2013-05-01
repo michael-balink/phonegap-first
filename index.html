@@ -12,7 +12,7 @@
 		function deviceReady () {
 			function log (txt) {
 				alert (txt);
-				$ ('#log').append ('<li>').text (txt);
+				$ ('#log').append ($ ('<li>').append ('<pre>').html (txt));
 			};
 
 			String.prototype.startsWith = function (str) { return (this.substr(0, str.length) === str); }
@@ -93,10 +93,12 @@
 	        }
 		};
 
-		document.addEventListener ("deviceready", function (e) { deviceReady (); alert (JSON.stringify (e)); }, false);
+		function onLoad () {
+			document.addEventListener ("deviceready", function (e) { deviceReady (); alert (JSON.stringify (e)); }, false);
+		}
 	</script>
 </head>
-<body>
+<body onload="onLoad()">
 	<h1>Hello VF!</h1>
 
 	<p id="message">Click here.</p>
