@@ -46,12 +46,14 @@
 
             $('#login').click(function(e) {
                 e.preventDefault();
-        //        cb.onLocationChange = function(loc){   
+            /*
+                cb.onLocationChange = function(loc){   
                     if (loc.startsWith(redirectUri)) {
-        //                cb.close();
+                        cb.close();
                         sessionCallback(unescape(loc));
                     }
                 };
+            */
         //        cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
         		window.open (getAuthorizeUrl(loginUrl, clientId, redirectUri));
             });
