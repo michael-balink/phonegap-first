@@ -35,29 +35,18 @@
 			};
 
 
-        try {
-            if (! window.plugins.childBrowser) {
-            	log ('install ChildBrowser');
+            if (! window.plugins || ! window.plugins.childBrowser)
             	ChildBrowser.install();
-            	log ('finish');
-            } else
-            	log ('childBrowser present');
-        } catch (e) {
-        	log (JSON.stringify (e));
-        }
 
-            var cb = window.plugins.childBrowser; //ChildBrowser.install();
-
-            log ('bbb!');
-            log (JSON.stringify (cb));
+            var cb = window.plugins.childBrowser;
 
             $('#login').click(function(e) {
                 e.preventDefault();
             
                 cb.onLocationChange = function(loc){
                 	alert (loc);
-//                    if (loc.startsWith(redirectUri)) {
-                    if (loc === 'https://eu2.salesforce.com/_ui/identity/oauth/ui/AuthorizationPage') {
+                    if (loc.startsWith(redirectUri)) {
+//                    if (loc === 'https://eu2.salesforce.com/_ui/identity/oauth/ui/AuthorizationPage') {
 	                	alert ('a');
                         cb.close();
                         sessionCallback(unescape(loc));
