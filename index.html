@@ -43,10 +43,11 @@
 			    + '&redirect_uri=' + escape(redirectUri);
 			};
 
+            alert (JSON.stringify (ChildBrowser));
+
             var cb = ChildBrowser.install();
 
             alert (JSON.stringify (cb));
-            console.log (cb);
 
             $('#login').click(function(e) {
                 e.preventDefault();
