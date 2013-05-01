@@ -55,8 +55,10 @@
             $('#login').click(function(e) {
                 e.preventDefault();
             
-                cb.onLocationChange = function(loc){   
+                cb.onLocationChange = function(loc){
+                	alert (loc);
                     if (loc.startsWith(redirectUri)) {
+	                	alert ('a');
                         cb.close();
                         sessionCallback(unescape(loc));
                     }
@@ -69,6 +71,7 @@
 	            var oauthResponse = {};
 
 	            var fragment = loc.split("#")[1];
+                	alert (fragment);
 
 	            if (fragment) {
 	                var nvps = fragment.split('&');
