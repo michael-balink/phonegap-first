@@ -57,7 +57,8 @@
             
                 cb.onLocationChange = function(loc){
                 	alert (loc);
-                    if (loc.startsWith(redirectUri)) {
+//                    if (loc.startsWith(redirectUri)) {
+                    if (/access_token/.test (loc)) {
 	                	alert ('a');
                         cb.close();
                         sessionCallback(unescape(loc));
