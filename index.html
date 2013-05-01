@@ -43,9 +43,9 @@
 			    + '&redirect_uri=' + escape(redirectUri);
 			};
 
-            alert (JSON.stringify (ChildBrowser));
+            alert ('aaa!');
 
-            var cb = ChildBrowser.install();
+            var cb = window.plugins.childBrowser; //ChildBrowser.install();
 
             alert (JSON.stringify (cb));
 
