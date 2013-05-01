@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="scripts/forcetk.js"></script>
 
 	<script type="text/javascript">
-	//	function deviceReady () {
+		function deviceReady () {
 			function log (txt) {
 				alert (txt);
 				$ ('#log').append ($ ('<li>').append ('<pre>').html (txt));
@@ -94,11 +94,11 @@
 	                );
 	            }
 	        }
-	//	};
+		};
 
 		function onLoad () {
 			log ('onLoad');
-		//	document.addEventListener ("deviceready", function (e) { deviceReady (); log (JSON.stringify (e)); }, false);
+			document.addEventListener ("deviceready", function (e) { deviceReady (); log (JSON.stringify (e)); }, false);
 		}
 	</script>
 </head>
