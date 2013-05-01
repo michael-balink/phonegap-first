@@ -46,7 +46,7 @@
         } catch (e) {
         	log (JSON.stringify (e));
         }
-/*
+
             var cb = window.plugins.childBrowser; //ChildBrowser.install();
 
             log ('bbb!');
@@ -63,10 +63,7 @@
                 };
             
                 cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
-
-        		//window.open (getAuthorizeUrl(loginUrl, clientId, redirectUri));
             });
-*/
 
 	        function sessionCallback(loc) {
 	            var oauthResponse = {};
@@ -106,7 +103,7 @@
 
 	<p id="message">Click here.</p>
 
-	<button type="button" id="login">go to ...</button>
+	<button type="button" id="login">Login to SF ...</button>
 
 	<ul id="log"></ul>
 </body>
