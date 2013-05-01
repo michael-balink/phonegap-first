@@ -31,23 +31,23 @@
 			    + '&redirect_uri=' + escape(redirectUri);
 			};
 
-            alert ('aaa!');
+            log ('aaa!');
 
         try {
             if (! window.plugins.childBrowser) {
-            	alert ('install ChildBrowser');
+            	log ('install ChildBrowser');
             	ChildBrowser.install();
-            	alert ('finish');
+            	log ('finish');
             } else
-            	alert ('childBrowser present');
-        } carch (e) {
-        	alert (JSON.stringify (e));
+            	log ('childBrowser present');
+        } catch (e) {
+        	log (JSON.stringify (e));
         }
 /*
             var cb = window.plugins.childBrowser; //ChildBrowser.install();
 
-            alert ('bbb!');
-            alert (JSON.stringify (cb));
+            log ('bbb!');
+            log (JSON.stringify (cb));
 
             $('#login').click(function(e) {
                 e.preventDefault();
@@ -60,9 +60,10 @@
                 };
             
                 cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
-*/
-        //		window.open (getAuthorizeUrl(loginUrl, clientId, redirectUri));
+
+        		//window.open (getAuthorizeUrl(loginUrl, clientId, redirectUri));
             });
+*/
 
 	        function sessionCallback(loc) {
 	            var oauthResponse = {};
@@ -90,7 +91,7 @@
 	                );
 	            }
 	        }
-		});
+		};
 
 		document.addEventListener ("deviceready", function (e) { deviceReady (); alert (JSON.stringify (e)); }, false);
 	</script>
