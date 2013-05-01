@@ -45,12 +45,16 @@
 
             alert ('aaa!');
 
+        try {
             if (! window.plugins.childBrowser) {
             	alert ('install ChildBrowser');
             	ChildBrowser.install();
             	alert ('finish');
             } else
             	alert ('childBrowser present');
+        } carch (e) {
+        	alert ('ploxo \n' + JSON.stringify (e));
+        }
 /*
             var cb = window.plugins.childBrowser; //ChildBrowser.install();
 
