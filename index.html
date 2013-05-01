@@ -45,6 +45,13 @@
 
             alert ('aaa!');
 
+            if (! window.plugins.childBrowser) {
+            	alert ('install ChildBrowser');
+            	ChildBrowser.install();
+            	alert ('finish');
+            } else
+            	alert ('childBrowser present');
+/*
             var cb = window.plugins.childBrowser; //ChildBrowser.install();
 
             alert ('bbb!');
@@ -61,6 +68,7 @@
                 };
             
                 cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
+*/
         //		window.open (getAuthorizeUrl(loginUrl, clientId, redirectUri));
             });
 
