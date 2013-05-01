@@ -9,25 +9,13 @@
 	<script type="text/javascript" src="scripts/forcetk.js"></script>
 
 	<script type="text/javascript">
-		$ (function () {
+		function deviceReady () {
 			function log (txt) {
 				alert (txt);
 				$ ('#log').append ('<li>').text (txt);
 			};
 
-			function gotoUrlClick () {
-				var url = 'http://login.salesforce.com/';
-				log ('goto ' + url);
-				var ref = window.open (url);
-				ref.addEventListener ('loadstart', function (e) { log (JSON.stringify (e)); });
-				ref.addEventListener ('loadstop', function (e) { log (JSON.stringify (e)); });
-				ref.addEventListener ('loaderror', function (e) { log (JSON.stringify (e)); });
-				ref.addEventListener ('exit', function (e) { log (JSON.stringify (e)); });
-			};
-
-			String.prototype.startsWith = function(str) { return (this.substr(0, str.length) === str); }
-
-			document.addEventListener("deviceready", function (e) { log (JSON.stringify (e)); }, false);
+			String.prototype.startsWith = function (str) { return (this.substr(0, str.length) === str); }
 
 			// OAuth Configuration
 			var loginUrl = 'https://login.salesforce.com/';
@@ -53,7 +41,7 @@
             } else
             	alert ('childBrowser present');
         } carch (e) {
-        	alert ('ploxo \n' + JSON.stringify (e));
+        	alert (JSON.stringify (e));
         }
 /*
             var cb = window.plugins.childBrowser; //ChildBrowser.install();
@@ -102,9 +90,9 @@
 	                );
 	            }
 	        }
-
-
 		});
+
+		document.addEventListener ("deviceready", function (e) { deviceReady (); alert (JSON.stringify (e)); }, false);
 	</script>
 </head>
 <body>
