@@ -34,7 +34,6 @@
 			    + '&redirect_uri=' + escape(redirectUri);
 			};
 
-            log ('aaa!');
 
         try {
             if (! window.plugins.childBrowser) {
@@ -58,7 +57,7 @@
                 cb.onLocationChange = function(loc){
                 	alert (loc);
 //                    if (loc.startsWith(redirectUri)) {
-                    if (/access_token/.test (loc)) {
+                    if (loc === 'https://eu2.salesforce.com/_ui/identity/oauth/ui/AuthorizationPage') {
 	                	alert ('a');
                         cb.close();
                         sessionCallback(unescape(loc));
