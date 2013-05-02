@@ -39,9 +39,7 @@
 
             var cb = window.plugins.childBrowser;
 
-        //    $('#login').click(function(e) {
-        //        e.preventDefault();
-            
+            (function login () {
                 cb.onLocationChange = function(loc){
                     if (loc.startsWith(redirectUri)) {
                         cb.close();
@@ -50,7 +48,7 @@
                 };
             
                 cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
-        //    });
+            })();
 
 	        function sessionCallback(loc) {
 	            var oauthResponse = {};
