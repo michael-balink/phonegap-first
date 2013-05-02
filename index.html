@@ -55,8 +55,8 @@
 	        				function (tx, err) { log('Insert ('+r.Id+') :: SQL failed: '  + JSON.stringify(arguments)); }
         				); // executeSql INSERT
 	        		},
-	        		function (tx, err) { log('Insert Transaction ('+r.Id+') :: SQL success: ' + JSON.stringify(arguments)); },
-	        		function (tx, err) { log('Insert Transaction ('+r.Id+') :: SQL failed: '  + JSON.stringify(arguments)); }
+	        		function (tx, err) { log('Insert Transaction ('+r.Id+') :: SQL failed: '  + JSON.stringify(arguments)); },
+	        		function (tx, err) { log('Insert Transaction ('+r.Id+') :: SQL success: ' + JSON.stringify(arguments)); }
         		); // transaction
 	        }
 
@@ -88,8 +88,8 @@
 	        				function (tx, err) { log('Select :: SQL failed: '  + JSON.stringify(arguments)) }
 	        			); // executeSql SELECT
 	        		},
-	        		function (tx, err) { log('Select Transaction :: SQL success: ' + JSON.stringify(arguments)); },
-	        		function (tx, err) { log('Select Transaction :: SQL failed: '  + JSON.stringify(arguments)); }
+	        		function (tx, err) { log('Select Transaction :: SQL failed: '  + JSON.stringify(arguments)); },
+	        		function (tx, err) { log('Select Transaction :: SQL success: ' + JSON.stringify(arguments)); }
 	        	); // transaction
 	        }
 /*
@@ -152,7 +152,8 @@
 	        } // sessionCallback(loc)
 */
 			insertToDb({ "Id": "1111", "Name": "AAAA"});
-			insertToDb({ "Id": "1111", "Name": "AAAA"});
+			insertToDb({ "Id": "1111", "Name": "AAAA"}); // will fail
+			insertToDb({ "Id": "2222", "Name": "BBBB"});
 	        $('#showDB').click(queryAllDb);
 	        //TODO insertToDb
 		}
