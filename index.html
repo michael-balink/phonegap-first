@@ -45,19 +45,22 @@
 	        	return db;
 	        })();
 
-	        function insertToDb(db, r) {
+	        function insertToDb(r) {
 	        	db.transaction(
 	        		function (tx) { tx.executeSql('INSERT INTO Lead (Id, Name) VALUES ('+r.Id+', "'+r.Name+'")'); },
 	        		function (tx,err) { log('SQL failed: '+err); }
         		);
 	        }
 
-	        function queryAllDb(db) {
+	        function queryAllDb() {
 	        	db.transaction(
 	        		function (tx) {
 	        			tx.executeSql(
-	        				'SELECT Id, Name FROM Lead', [],
+	        				'SELECT Id, Name FROM Lead',
+	        				[],
 	        				function (tx, r) {
+	        					log(JSON.stringify(r));
+
 		                		$('#result tbody').remove ();
 		                		if (r.rows.length === 0) {
 		                			log('No data selected in DB.');
@@ -72,10 +75,11 @@
 		                				$t.append('<tr><td>'+v.Id+'</td><td>'+v.Name+'</td></tr>');
 		                			}
 		                		);
-	        				}
+	        				},
+	        				function (tx, err) { log('SQL failed: ' + err) }
 	        			);
 	        		},
-	        		function (tx,err) { log('SQL failed: '+err); }
+	        		function (tx,err) { log('SQL failed: ' + §); }
 	        	);
 	        }
 
