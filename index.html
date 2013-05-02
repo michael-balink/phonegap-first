@@ -100,21 +100,22 @@
 	        	); // transaction
 	        }
 //*
-            (function login () {
-	            if (! window.plugins || ! window.plugins.childBrowser)
-	            	ChildBrowser.install();
-	            var cb = window.plugins.childBrowser;
+			if (Connection.NONE !== navigator.connection.type)
+	            (function login () {
+		            if (! window.plugins || ! window.plugins.childBrowser)
+		            	ChildBrowser.install();
+		            var cb = window.plugins.childBrowser;
 
-                cb.onLocationChange = function(loc){
-                    if (loc.startsWith(redirectUri)) {
-                        cb.close();
-                        log('SF: login success.');
-                        sessionCallback(unescape(loc));
-                    }
-                };
-            
-                cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
-            })(); // login()
+	                cb.onLocationChange = function(loc){
+	                    if (loc.startsWith(redirectUri)) {
+	                        cb.close();
+	                        log('SF: login success.');
+	                        sessionCallback(unescape(loc));
+	                    }
+	                };
+	            
+	                cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
+	            })(); // login()
 
 	        function sessionCallback(loc) {
 	            var oauthResponse = {};
@@ -139,6 +140,8 @@
                 client.query(
                 	'SELECT Id, Name FROM Lead LIMIT 1',
                 	(function (r) {
+                		log('Downloaded from SF: ' + JSON.stringify(arguments));
+
                 		$('#result tbody').remove ();
                 		if (r.records.length === 0) {
                 			log('No data selected in Salesforce.');
@@ -158,11 +161,13 @@
             	);
 	        } // sessionCallback(loc)
 //*/
+/* demo data
 			(function () {
 				insertToDb({ "Id": "1111", "Name": "AAAA"});
 				insertToDb({ "Id": "1111", "Name": "AAAA"}); // will fail
 				insertToDb({ "Id": "2222", "Name": "BBBB"});
 			})();
+//*/
 	        $('#showDB').click(queryAllDb);
 	        //TODO insertToDb
 		}
