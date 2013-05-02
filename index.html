@@ -47,8 +47,14 @@
 
 	        function insertToDb(r) {
 	        	db.transaction(
-	        		function (tx) { tx.executeSql('INSERT INTO Lead (Id, Name) VALUES ('+r.Id+', "'+r.Name+'")'); },
-	        		function (tx,err) { log('SQL failed: '+err); }
+	        		function (tx) {
+	        			tx.executeSql(
+	        				'INSERT INTO Lead (Id, Name) VALUES ('+r.Id+', "'+r.Name+'")',
+	        				[],
+	        				function (tx, r) { log('Insert SQL :: Record inserted to DB'); }
+        				);
+	        		},
+	        		function (tx,err) { log('Insert Transaction :: SQL failed: ' + JSON.stringify(err)); }
         		);
 	        }
 
@@ -82,7 +88,7 @@
 	        		function (tx, err) { log('SQL failed: ' + err); }
 	        	);
 	        }
-
+/*
             (function login () {
 	            if (! window.plugins || ! window.plugins.childBrowser)
 	            	ChildBrowser.install();
@@ -140,7 +146,9 @@
                 	})
             	);
 	        } // sessionCallback(loc)
-
+*/
+			insertToDb({ "Id": "1111", "Name": "AAAA"});
+			insertToDb({ "Id": "1111", "Name": "AAAA"});
 	        $('#showDB').click(queryAllDb);
 	        //TODO insertToDb
 		}
