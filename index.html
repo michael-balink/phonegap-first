@@ -13,7 +13,7 @@
 
 	<script type="text/javascript">
 		function log (txt) {
-			alert (txt);
+			//setTimeout (function() { alert (txt);}, 0);
 			$ ('#log').append ($ ('<li>').append ('<pre>').html (txt));
 		}
 
@@ -33,13 +33,56 @@
 			    + '&redirect_uri=' + escape(redirectUri);
 			};
 
+	        var db = (function db_func () {
+	        	var db = window.openDatabase('test', '1.0', 'Test DB', 1000000);
 
-            if (! window.plugins || ! window.plugins.childBrowser)
-            	ChildBrowser.install();
+			    function create(tx) { tx.executeSql('CREATE TABLE IF NOT EXISTS Lead (Id UNIQUE, Name)'); }
+			    function fail(tx, err) { log("Error processing SQL: "+err); }
+			    function success(tx, err) { log("DB created: "+err); }
 
-            var cb = window.plugins.childBrowser;
+	        	db.transaction(create, fail, success);
+
+	        	return db;
+	        })();
+
+	        function insertToDb(db, r) {
+	        	db.transaction(
+	        		function (tx) { tx.executeSql('INSERT INTO Lead (Id, Name) VALUES ('+r.Id+', "'+r.Name+'")'); },
+	        		function (tx,err) { log('SQL failed: '+err); }
+        		);
+	        }
+
+	        function queryAllDb(db) {
+	        	db.transaction(
+	        		function (tx) {
+	        			tx.executeSql(
+	        				'SELECT Id, Name FROM Lead', [],
+	        				function (tx, r) {
+		                		$('#result tbody').remove ();
+		                		if (r.records.length === 0) {
+		                			$('#message').text('No data selected in DB.');
+		                			return;
+		                		}
+
+		                		var $t = $('#result').append('tbody');
+		                		$.each(
+		                			r.records,
+		                			function (k, v) {
+		                				$t.append('<tr><td>'+v.Id+'</td><td>'+v.Name+'</td></tr>');
+		                			}
+		                		);
+	        				}
+	        			);
+	        		},
+	        		function (tx,err) { log('SQL failed: '+err); }
+	        	);
+	        }
 
             (function login () {
+	            if (! window.plugins || ! window.plugins.childBrowser)
+	            	ChildBrowser.install();
+	            var cb = window.plugins.childBrowser;
+
                 cb.onLocationChange = function(loc){
                     if (loc.startsWith(redirectUri)) {
                         cb.close();
@@ -48,7 +91,7 @@
                 };
             
                 cb.showWebPage(getAuthorizeUrl(loginUrl, clientId, redirectUri));
-            })();
+            })(); // login()
 
 	        function sessionCallback(loc) {
 	            var oauthResponse = {};
@@ -65,37 +108,32 @@
 
 	            if (typeof oauthResponse['access_token'] === 'undefined') {
 	                log ('Unauthorized: No OAuth response.');
-	            } else {
-	                client.setSessionToken(oauthResponse.access_token, null, oauthResponse.instance_url);
-
-	                client.query("SELECT Name FROM Account LIMIT 1", 
-	                    function(response){
-	                        $('#message').html('The first account I see is '
-	                        +response.records[0].Name);
-	                    }
-	                );
+	                return;
 	            }
-	        }
 
-	        (function db_func () {
-	        	var db = window.openDatabase('test', '1.0', 'Test DB', 1000000);
+                client.setSessionToken(oauthResponse.access_token, null, oauthResponse.instance_url);
 
-			   function populateDB(tx) {
-			         tx.executeSql('DROP TABLE IF EXISTS DEMO');
-			         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-			         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-			         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
-			    }
+                client.query(
+                	'SELECT Id, Name FROM Lead LIMIT 1',
+                	(function (r) {
+                		$('#result tbody').remove ();
+                		if (r.records.length === 0) {
+                			$('#message').text('No data selected in Salesforce.');
+                			return;
+                		}
 
-			    function errorCB(tx, err) {
-			        log("Error processing SQL: "+err);
-			    }
-			    function successCB() {
-			        log("success!");
-			    }
-    
-	        	db.transaction(populateDB, errorCB, successCB);
-	        })();
+                		var $t = $('#result').append('tbody');
+                		$.each(
+                			r.records,
+                			function (k, v) {
+                				$t.append('<tr><td>'+v.Id+'</td><td>'+v.Name+'</td></tr>');
+                				insertToDb(v);
+                			}
+                		);
+                	})
+            	);
+	        } // sessionCallback(loc)
+
 		}
 
 		function onLoad () {
@@ -105,6 +143,21 @@
 </head>
 <body onload="onLoad()">
 	<p id="message">= = =</p>
+	<br />
+
+	<p>
+		<form id="db">
+			<button type="submit" name="showDB" id="showDB">Show DB</button>
+			<button type="submit" name="insert" id="insert">Insert</button>
+		</form>
+	</p>
+
+	<p>
+		<table id="result">
+			<caption>DB</caption>
+		</table>
+	</p>
+
 	<br />
 	<ul id="log"></ul>
 </body>
