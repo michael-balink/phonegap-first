@@ -99,7 +99,7 @@
 	        		function (tx, err) { log('Select Transaction :: SQL success: ' + JSON.stringify(arguments)); }
 	        	); // transaction
 	        }
-/*
+//*
             (function login () {
 	            if (! window.plugins || ! window.plugins.childBrowser)
 	            	ChildBrowser.install();
@@ -157,7 +157,7 @@
                 	})
             	);
 	        } // sessionCallback(loc)
-*/
+//*/
 			(function () {
 				insertToDb({ "Id": "1111", "Name": "AAAA"});
 				insertToDb({ "Id": "1111", "Name": "AAAA"}); // will fail
@@ -175,7 +175,7 @@
 <body onload="onLoad()">
 	<p>
 		<button type="button" name="showDB" id="showDB">Show DB</button>
-		<button type="button" name="insert" id="insert">Insert</button>
+		<!-- <button type="button" name="insert" id="insert">Insert</button> -->
 	</p>
 
 	<p>
