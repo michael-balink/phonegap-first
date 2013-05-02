@@ -86,6 +86,7 @@
                 cb.onLocationChange = function(loc){
                     if (loc.startsWith(redirectUri)) {
                         cb.close();
+                        log('SF: login success.');
                         sessionCallback(unescape(loc));
                     }
                 };
@@ -107,7 +108,7 @@
 	            }
 
 	            if (typeof oauthResponse['access_token'] === 'undefined') {
-	                log ('Unauthorized: No OAuth response.');
+	                log('Unauthorized: No OAuth response.');
 	                return;
 	            }
 
