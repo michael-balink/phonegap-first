@@ -54,7 +54,7 @@
 	        				function (tx, r) { log('Insert :: Record inserted to DB'); }
         				);
 	        		},
-	        		function (tx, err) { log('Insert Transaction :: SQL success: ' + JSON.stringify(arguments))); },
+	        		function (tx, err) { log('Insert Transaction :: SQL success: ' + JSON.stringify(arguments)); },
 	        		function (tx, err) { log('Insert Transaction :: SQL failed: '  + JSON.stringify(arguments)); }
         		);
 	        }
@@ -87,7 +87,7 @@
 	        			);
 	        		},
 	        		function (tx, err) { log('Select Transaction :: SQL success: ' + JSON.stringify(arguments)); },
-	        		function (tx, err) { log('Select Transaction :: SQL failed: '  + JSON.stringify(arguments))); }
+	        		function (tx, err) { log('Select Transaction :: SQL failed: '  + JSON.stringify(arguments)); }
 	        	);
 	        }
 /*
