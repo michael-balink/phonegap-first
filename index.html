@@ -68,7 +68,7 @@
 	        				[],
 	        				function (tx, r) {
 	        					try {
-		        					//log('Select :: SQL success: ' + JSON.stringify(arguments));
+		        					log('Select :: SQL success: ' + JSON.stringify(arguments));
 	
 			                		$('#result tbody').remove ();
 			                		if (r.rows.length === 0) {
@@ -81,6 +81,7 @@
 			                		$.each(
 			                			r.rows,
 			                			function (k, v) {
+			                				log('Select :: selected row: ' + JSON.stringify(v));
 			                				$t.append('<tr><td>'+v.Id+'</td><td>'+v.Name+'</td></tr>');
 			                			}
 			                		);
