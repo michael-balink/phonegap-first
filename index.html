@@ -60,11 +60,11 @@
 	        				function (tx, r) {
 		                		$('#result tbody').remove ();
 		                		if (r.rows.length === 0) {
-		                			$('#message').text('No data selected in DB.');
+		                			log('No data selected in DB.');
 		                			return;
 		                		}
 
-		                		$('#message').text(r.rows.length + ' retrived from DB.');
+		                		log(r.rows.length + ' retrived from DB.');
 		                		var $t = $('#result').append('tbody');
 		                		$.each(
 		                			r.rows,
@@ -120,11 +120,11 @@
                 	(function (r) {
                 		$('#result tbody').remove ();
                 		if (r.records.length === 0) {
-                			$('#message').text('No data selected in Salesforce.');
+                			log('No data selected in Salesforce.');
                 			return;
                 		}
 
-                		$('#message').text(r.records.length + ' retrived from SF.');
+                		log(r.records.length + ' retrived from SF.');
                 		var $t = $('<tbody>').appendTo('#result');
                 		$.each(
                 			r.records,
@@ -147,9 +147,6 @@
 	</script>
 </head>
 <body onload="onLoad()">
-	<p id="message">= = =</p>
-	<br />
-
 	<p>
 		<button type="button" name="showDB" id="showDB">Show DB</button>
 		<button type="button" name="insert" id="insert">Insert</button>
