@@ -54,8 +54,8 @@
 	        				function (tx, r) { log('Insert :: Record inserted to DB'); }
         				);
 	        		},
-	        		function (tx, err) { log('Insert Transaction :: SQL success: '); },
-	        		function (tx, err) { log('Insert Transaction :: SQL failed: ' + JSON.stringify(err)); }
+	        		function (tx, err) { log('Insert Transaction :: SQL success: ' + JSON.stringify(arguments))); },
+	        		function (tx, err) { log('Insert Transaction :: SQL failed: '  + JSON.stringify(arguments)); }
         		);
 	        }
 
@@ -66,7 +66,7 @@
 	        				'SELECT Id, Name FROM Lead',
 	        				[],
 	        				function (tx, r) {
-	        					log(JSON.stringify(r));
+	        					log(JSON.stringify(arguments));
 
 		                		$('#result tbody').remove ();
 		                		if (r.rows.length === 0) {
@@ -86,8 +86,8 @@
 	        				function (tx, err) { log('Select :: SQL failed: ' + err) }
 	        			);
 	        		},
-	        		function (tx, err) { log('Select Transaction :: SQL success: '); },
-	        		function (tx, err) { log('Select Transaction :: SQL failed: ' + err); }
+	        		function (tx, err) { log('Select Transaction :: SQL success: ' + JSON.stringify(arguments)); },
+	        		function (tx, err) { log('Select Transaction :: SQL failed: '  + JSON.stringify(arguments))); }
 	        	);
 	        }
 /*
