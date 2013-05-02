@@ -54,7 +54,7 @@
 	        				function (tx, err) { log('Insert ('+r.Id+') :: SQL success: ' + JSON.stringify(arguments)); },
 	        				function (tx, err) { log('Insert ('+r.Id+') :: SQL failed: '  + JSON.stringify(arguments)); }
         				); // executeSql INSERT
-	        		},
+	        		}, // transaction exec
 	        		function (tx, err) { log('Insert Transaction ('+r.Id+') :: SQL failed: '  + JSON.stringify(arguments)); },
 	        		function (tx, err) { log('Insert Transaction ('+r.Id+') :: SQL success: ' + JSON.stringify(arguments)); }
         		); // transaction
@@ -67,27 +67,32 @@
 	        				'SELECT Id, Name FROM Lead',
 	        				[],
 	        				function (tx, r) {
-	        					log(JSON.stringify(arguments));
+	        					try {
+		        					log('Select :: SQL success: ' + JSON.stringify(arguments));
+	
+			                		$('#result tbody').remove ();
+			                		if (r.rows.length === 0) {
+			                			log('No data selected in DB.');
+			                			return;
+			                		}
+	
+			                		log(r.rows.length + ' retrived from DB.');
+			                		var $t = $('#result').append('tbody');
+			                		$.each(
+			                			r.rows,
+			                			function (k, v) {
+			                				$t.append('<tr><td>'+v.Id+'</td><td>'+v.Name+'</td></tr>');
+			                			}
+			                		);
+	        					} catch (e) {
+	        						log('Select :: smthn goes wrong... ' + JSON.stringify(e));
+	        					}
 
-		                		$('#result tbody').remove ();
-		                		if (r.rows.length === 0) {
-		                			log('No data selected in DB.');
-		                			return;
-		                		}
-
-		                		log(r.rows.length + ' retrived from DB.');
-		                		var $t = $('#result').append('tbody');
-		                		$.each(
-		                			r.rows,
-		                			function (k, v) {
-		                				$t.append('<tr><td>'+v.Id+'</td><td>'+v.Name+'</td></tr>');
-		                			}
-		                		);
+		                		return true;
 	        				},
-	        				function (tx, err) { log('Select :: SQL success: ' + JSON.stringify(arguments)) },
-	        				function (tx, err) { log('Select :: SQL failed: '  + JSON.stringify(arguments)) }
+	        				function (tx, err) { log('Select :: SQL failed: ' + JSON.stringify(arguments)) }
 	        			); // executeSql SELECT
-	        		},
+	        		}, // transaction exec
 	        		function (tx, err) { log('Select Transaction :: SQL failed: '  + JSON.stringify(arguments)); },
 	        		function (tx, err) { log('Select Transaction :: SQL success: ' + JSON.stringify(arguments)); }
 	        	); // transaction
