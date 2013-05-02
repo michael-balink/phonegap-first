@@ -68,7 +68,7 @@
 	        				[],
 	        				function (tx, r) {
 	        					try {
-		        					log('Select :: SQL success: ' + JSON.stringify(arguments));
+		        					//log('Select :: SQL success: ' + JSON.stringify(arguments));
 	
 			                		$('#result tbody').remove ();
 			                		if (r.rows.length === 0) {
@@ -86,6 +86,7 @@
 			                		);
 	        					} catch (e) {
 	        						log('Select :: smthn goes wrong... ' + JSON.stringify(e));
+	        						return false; // break transaction
 	        					}
 
 		                		return true;
