@@ -37,8 +37,8 @@
 	        	var db = window.openDatabase('test', '1.0', 'Test DB', 1000000);
 
 			    function create(tx) { tx.executeSql('CREATE TABLE IF NOT EXISTS Lead (Id UNIQUE, Name)'); }
-			    function fail(tx, err) { log("Error processing SQL: "+err); }
-			    function success(tx, err) { log("DB created: "+err); }
+			    function fail(tx, err) { log("Error processing SQL: "+JSON.stringify(arguments)); }
+			    function success(tx, err) { log("DB created: "+JSON.stringify(arguments)); }
 
 	        	db.transaction(create, fail, success);
 
@@ -51,12 +51,12 @@
 	        			tx.executeSql(
 	        				'INSERT INTO Lead (Id, Name) VALUES (?,?)',
 	        				[ r.Id, r.Name ],
-	        				function (tx, r) { log('Insert :: SQL success: ' + JSON.stringify(arguments)); },
-	        				function (tx, r) { log('Insert :: SQL failed: '  + JSON.stringify(arguments)); }
+	        				function (tx, err) { log('Insert ('+r.Id+') :: SQL success: ' + JSON.stringify(arguments)); },
+	        				function (tx, err) { log('Insert ('+r.Id+') :: SQL failed: '  + JSON.stringify(arguments)); }
         				); // executeSql INSERT
 	        		},
-	        		function (tx, err) { log('Insert Transaction :: SQL success: ' + JSON.stringify(arguments)); },
-	        		function (tx, err) { log('Insert Transaction :: SQL failed: '  + JSON.stringify(arguments)); }
+	        		function (tx, err) { log('Insert Transaction ('+r.Id+') :: SQL success: ' + JSON.stringify(arguments)); },
+	        		function (tx, err) { log('Insert Transaction ('+r.Id+') :: SQL failed: '  + JSON.stringify(arguments)); }
         		); // transaction
 	        }
 
