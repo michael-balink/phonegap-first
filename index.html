@@ -123,7 +123,8 @@
                 			return;
                 		}
 
-                		var $t = $('#result').append('tbody');
+                		$('#message').text(r.records.length + ' retrived from SF.');
+                		var $t = $('<tbody>').appendTo('#result');
                 		$.each(
                 			r.records,
                 			function (k, v) {
@@ -135,6 +136,8 @@
             	);
 	        } // sessionCallback(loc)
 
+	        $('#showDB').click(queryAllDb);
+	        //TODO insertToDb
 		}
 
 		function onLoad () {
@@ -147,10 +150,8 @@
 	<br />
 
 	<p>
-		<form id="db">
-			<button type="submit" name="showDB" id="showDB">Show DB</button>
-			<button type="submit" name="insert" id="insert">Insert</button>
-		</form>
+		<button type="button" name="showDB" id="showDB">Show DB</button>
+		<button type="button" name="insert" id="insert">Insert</button>
 	</p>
 
 	<p>
