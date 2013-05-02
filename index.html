@@ -49,14 +49,15 @@
 	        	db.transaction(
 	        		function (tx) {
 	        			tx.executeSql(
-	        				'INSERT INTO Lead (Id, Name) VALUES ('+r.Id+', "'+r.Name+'")',
-	        				[],
-	        				function (tx, r) { log('Insert :: Record inserted to DB'); }
-        				);
+	        				'INSERT INTO Lead (Id, Name) VALUES (?,?)',
+	        				[ r.Id, r.Name ],
+	        				function (tx, r) { log('Insert :: SQL success: ' + JSON.stringify(arguments)); },
+	        				function (tx, r) { log('Insert :: SQL failed: '  + JSON.stringify(arguments)); }
+        				); // executeSql INSERT
 	        		},
 	        		function (tx, err) { log('Insert Transaction :: SQL success: ' + JSON.stringify(arguments)); },
 	        		function (tx, err) { log('Insert Transaction :: SQL failed: '  + JSON.stringify(arguments)); }
-        		);
+        		); // transaction
 	        }
 
 	        function queryAllDb() {
@@ -83,12 +84,13 @@
 		                			}
 		                		);
 	        				},
-	        				function (tx, err) { log('Select :: SQL failed: ' + err) }
-	        			);
+	        				function (tx, err) { log('Select :: SQL success: ' + JSON.stringify(arguments)) },
+	        				function (tx, err) { log('Select :: SQL failed: '  + JSON.stringify(arguments)) }
+	        			); // executeSql SELECT
 	        		},
 	        		function (tx, err) { log('Select Transaction :: SQL success: ' + JSON.stringify(arguments)); },
 	        		function (tx, err) { log('Select Transaction :: SQL failed: '  + JSON.stringify(arguments)); }
-	        	);
+	        	); // transaction
 	        }
 /*
             (function login () {
