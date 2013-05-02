@@ -59,14 +59,15 @@
 	        				'SELECT Id, Name FROM Lead', [],
 	        				function (tx, r) {
 		                		$('#result tbody').remove ();
-		                		if (r.records.length === 0) {
+		                		if (r.rows.length === 0) {
 		                			$('#message').text('No data selected in DB.');
 		                			return;
 		                		}
 
+		                		$('#message').text(r.rows.length + ' retrived from DB.');
 		                		var $t = $('#result').append('tbody');
 		                		$.each(
-		                			r.records,
+		                			r.rows,
 		                			function (k, v) {
 		                				$t.append('<tr><td>'+v.Id+'</td><td>'+v.Name+'</td></tr>');
 		                			}
