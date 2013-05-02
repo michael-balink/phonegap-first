@@ -51,7 +51,7 @@
 	        			tx.executeSql(
 	        				'INSERT INTO Lead (Id, Name) VALUES ('+r.Id+', "'+r.Name+'")',
 	        				[],
-	        				function (tx, r) { log('Insert SQL :: Record inserted to DB'); }
+	        				function (tx, r) { log('Insert :: Record inserted to DB'); }
         				);
 	        		},
 	        		function (tx,err) { log('Insert Transaction :: SQL failed: ' + JSON.stringify(err)); }
@@ -82,10 +82,10 @@
 		                			}
 		                		);
 	        				},
-	        				function (tx, err) { log('SQL failed: ' + err) }
+	        				function (tx, err) { log('Select :: SQL failed: ' + err) }
 	        			);
 	        		},
-	        		function (tx, err) { log('SQL failed: ' + err); }
+	        		function (tx, err) { log('Select Transaction :: SQL failed: ' + err); }
 	        	);
 	        }
 /*
