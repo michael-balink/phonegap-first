@@ -68,23 +68,23 @@
 	        				[],
 	        				function (tx, r) {
 	        					try {
-		        					log('Select :: SQL success: ' + JSON.stringify(arguments));
+		        					//log('Select :: SQL success: ' + JSON.stringify(arguments)); // buggy r
+
+		        					var rows = r.rows;
 	
 			                		$('#result tbody').remove ();
-			                		if (r.rows.length === 0) {
+			                		if (rows.length === 0) {
 			                			log('No data selected in DB.');
 			                			return;
 			                		}
 	
-			                		log(r.rows.length + ' retrived from DB.');
-			                		var $t = $('#result').append('tbody');
-			                		$.each(
-			                			r.rows,
-			                			function (k, v) {
-			                				log('Select :: selected row: ' + JSON.stringify(v));
-			                				$t.append('<tr><td>'+v.Id+'</td><td>'+v.Name+'</td></tr>');
-			                			}
-			                		);
+			                		log(rows.length + ' retrived from DB.');
+			                		var $t = $('#result').append('<tbody>');
+			                		for (var i = 0; i < rows.length; ++ i) {
+			                			var row = rows.item(i);
+		                				log('Select :: selected row: ' + JSON.stringify(row));
+		                				$t.append('<tr><td>'+row.Id+'</td><td>'+row.Name+'</td></tr>');
+			                		}
 	        					} catch (e) {
 	        						log('Select :: smthn goes wrong... ' + JSON.stringify(e));
 	        						return false; // break transaction
@@ -158,9 +158,11 @@
             	);
 	        } // sessionCallback(loc)
 */
-			insertToDb({ "Id": "1111", "Name": "AAAA"});
-			insertToDb({ "Id": "1111", "Name": "AAAA"}); // will fail
-			insertToDb({ "Id": "2222", "Name": "BBBB"});
+			(function () {
+				insertToDb({ "Id": "1111", "Name": "AAAA"});
+				insertToDb({ "Id": "1111", "Name": "AAAA"}); // will fail
+				insertToDb({ "Id": "2222", "Name": "BBBB"});
+			})();
 	        $('#showDB').click(queryAllDb);
 	        //TODO insertToDb
 		}
