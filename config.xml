@@ -49,8 +49,6 @@
     <plugin name="InAppBrowser" value="CDVInAppBrowser" />
     <gap:plugin name="ChildBrowser" />
 
-    <content src="vf-hosted.html" />
-
     <!-- TODO: Define app icon for each platform. -->
     <!-- TODO: Define app splash screen for each platform. -->
 
