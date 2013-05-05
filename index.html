@@ -42,7 +42,7 @@
 
 			window.open(
 				[ oauth.instance_url,'/secur/frontdoor.jsp?sid=',oauth.access_token,'&retURL=',encodeURIComponent(start) ].join(''),
-				'_self', 'location=yes'
+				'_blank', 'location=yes'
 			);
 
 			// next try this
