@@ -15,17 +15,19 @@ function sessionCallback(loc) {
 	var oauthResponse = {};
 
 	var fragment = loc.split("#")[1];
-	log('fragment: ' + fragment);
 
-	if (fragment) {
-		var nvps = fragment.split('&');
-		for (var i = 0; i < nvps.length; ++ i) {
-			var parts = nvps[i].split('=');
-			oauthResponse[parts[0]] = unescape(parts[1]);
-		}
+	if (! fragment) {
+		log('No login part returened.');
+		return;
+	}
+	
+	var nvps = fragment.split('&');
+	for (var i = 0; i < nvps.length; ++ i) {
+		var parts = nvps[i].split('=');
+		oauthResponse[parts[0]] = unescape(parts[1]);
 	}
 
-	if (oauthResponse['access_token']) {
+	if (! oauthResponse['access_token']) {
 		log('Unauthorized: No OAuth response.');
 		return;
 	}
