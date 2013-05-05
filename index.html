@@ -16,7 +16,7 @@
 		var w;
 		function deviceReady () {
 			w = window.open ('https://c.eu2.visual.force.com/apex/PhoneGap_VF_Hosted', '_self', 'location=no');
-			
+
 			w.addEventListener('loadstart', function(event) { alert('start: ' + event.url);     });
 			w.addEventListener('loadstop',  function(event) { alert('stop: '  + event.url);     });
 			w.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
@@ -27,5 +27,7 @@
 
 <body onload="document.addEventListener('deviceready', deviceReady, false);">
 	<h1>VF Hosted app</h1>
+
+	<iframe src="https://c.eu2.visual.force.com/apex/PhoneGap_VF_Hosted"></iframe>
 </body>
 </html>
