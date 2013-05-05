@@ -1,0 +1,19 @@
+<apex:page showHeader="false" standardStylesheets="false">
+
+    <script type="text/javascript">
+        function onLoad() {
+            function dispatchMessage(msg) {
+                alert('data: ' + msg.data + '\norigin: ' + msg.origin);
+            }
+
+            window.addEventListener('message', dispatchMessage, false);
+
+            window.parent.postMessage('a', '*');
+        } // onLoad()
+    </script>
+
+<body onload="onLoad()">
+    <h1>VF hosted page</h1>
+</body>
+
+</apex:page>
