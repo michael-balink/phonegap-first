@@ -12,6 +12,13 @@
 	<script type="text/javascript" src="scripts/loginToSf.js"></script>
 
 	<script type="text/javascript">
+		function log (txt) {
+			//setTimeout (function() { alert (txt);}, 0);
+			$ ('#log').append ($ ('<li>').append ('<pre>').html (txt));
+		}
+
+		String.prototype.startsWith = function (str) { return (this.substr(0, str.length) === str); }
+
 		function dispatchMessage (msg) {
 			alert('data: ' + msg.data + '\norigin: ' + msg.origin);
 
