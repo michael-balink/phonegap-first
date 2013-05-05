@@ -15,7 +15,8 @@
 
 		var w;
 		function deviceReady () {
-			w = window.open ('https://c.eu2.visual.force.com/apex/PhoneGap_VF_Hosted', '_blank', 'location=no');
+			w = window.open ('https://c.eu2.visual.force.com/apex/PhoneGap_VF_Hosted', '_self', 'location=no');
+			
 			w.addEventListener('loadstart', function(event) { alert('start: ' + event.url);     });
 			w.addEventListener('loadstop',  function(event) { alert('stop: '  + event.url);     });
 			w.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
