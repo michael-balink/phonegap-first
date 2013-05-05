@@ -5,7 +5,7 @@ var redirectUri = 'https://login.salesforce.com/services/oauth2/success';
 
 var client = window.client || new forcetk.Client(clientId, loginUrl);
 
-var logedinCallback = window.logedinCallback || function (oauthResponse) { alert(JSON.stringify(oauthResponse)); };
+var logedinCallback = window.logedinCallback || function (oauthResponse) { log(JSON.stringify(oauthResponse)); };
 
 function getAuthorizeUrl(loginUrl, clientId, redirectUri) {
 	return loginUrl + 'services/oauth2/authorize?display=touch'+ '&response_type=token&client_id=' + escape(clientId) + '&redirect_uri=' + escape(redirectUri);
@@ -15,6 +15,7 @@ function sessionCallback(loc) {
 	var oauthResponse = {};
 
 	var fragment = loc.split("#")[1];
+	log('fragment: ' + fragment);
 
 	if (fragment) {
 		var nvps = fragment.split('&');
@@ -30,6 +31,8 @@ function sessionCallback(loc) {
 	}
 
 	client.setSessionToken(oauthResponse.access_token, null, oauthResponse.instance_url);
+
+	logedinCallback(oauthResponse);
 } // sessionCallback(loc)
 
 function loginToSf () {
