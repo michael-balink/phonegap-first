@@ -28,16 +28,16 @@
 		}
 		window.addEventListener('message', dispatchMessage, false);
 
-		// var logedinCallback = function (oauth) {
-		// 	var start = 'https://c.eu2.visual.force.com/apex/PhoneGap_VF_Hosted';
-		//	var instance = oauth.instance_url;
-		// 	$('body').append([
-		// 		'<iframe width="100%" height="300" id="VFhosted"',
-		// 			'sandbox="allow-same-origin allow-top-navigation allow-forms allow-scripts"',
-		// 			'src="',oauth.instance_url,'/secur/frontdoor.jsp?sid=',oauth.access_token,'&sid=',encodeURIComponent(start),">',
-		// 		'</iframe>'
-		// 	].join(''));
-		// };
+		var logedinCallback = function (oauth) {
+			var start = 'https://c.eu2.visual.force.com/apex/PhoneGap_VF_Hosted';
+			var instance = oauth.instance_url;
+			$('body').append([
+				'<iframe width="100%" height="300" id="VFhosted"',
+					'sandbox="allow-same-origin allow-top-navigation allow-forms allow-scripts"',
+					'src="',oauth.instance_url,'/secur/frontdoor.jsp?sid=',oauth.access_token,'&sid=',encodeURIComponent(start),'">',
+				'</iframe>'
+			].join(''));
+		};
 
 		function deviceReady () {
 			loginToSf();
