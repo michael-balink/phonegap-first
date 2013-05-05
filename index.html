@@ -8,13 +8,23 @@
 	<script src="childbrowser.js" ></script>
 
 	<script type="text/javascript">
+		function dispatchMessage (e) {
+			alert (JSON.stringify(e));
+		}
+		window.addEventListener('message', dispatchMessage, false);
+
+		var w;
 		function deviceReady () {
-			window.open ('https://c.eu2.visual.force.com/apex/PhoneGap_VF_Hosted', '_blank', 'location=no');
+			w = window.open ('https://c.eu2.visual.force.com/apex/PhoneGap_VF_Hosted', '_blank', 'location=no');
+			w.addEventListener('loadstart', function(event) { alert('start: ' + event.url);     });
+			w.addEventListener('loadstop',  function(event) { alert('stop: '  + event.url);     });
+			w.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
+			w.addEventListener('exit',      function(event) { alert(event.type);                });
 		}
 	</script>
 </head>
 
-<body onload="document.addEventListener ('deviceready', deviceReady, false);">
+<body onload="document.addEventListener('deviceready', deviceReady, false);">
 	<h1>VF Hosted app</h1>
 </body>
 </html>
